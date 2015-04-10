@@ -24,10 +24,16 @@ namespace NoCo.AwesomiumBrowserWindow
             InitializeComponent();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
-        private void button1_Click(object sender, RoutedEventArgs e)
+        public Uri Source
         {
-            browser.Source = new Uri(uri.Text);
+            get { return (Uri)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
+
+        // Identifies the <see cref="Source"/> dependency property.
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source",
+            typeof(Uri), typeof(MyControl),
+            new FrameworkPropertyMetadata(null));
     }
 }

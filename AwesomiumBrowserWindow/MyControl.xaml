@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:awe="http://schemas.awesomium.com/winfx" x:Class="NoCo.AwesomiumBrowserWindow.MyControl"
+             xmlns:data="http://schemas.awesomium.com/winfx/data"
              Background="{DynamicResource VsBrush.Window}"
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d"
@@ -19,14 +20,17 @@
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="uri" />
-                    <Button Grid.Column="1" Click="button1_Click">Go</Button>
+                    <Button 
+                        Command="{x:Static NavigationCommands.Refresh}"
+                        CommandParameter="True"
+                        CommandTarget="{Binding ElementName=webControl}">R</Button>
+                    <TextBox Grid.Column="1" Text="{data:SourceBinding webControl}" />
                 </Grid>
             </StackPanel>
         </Grid>
-        <awe:WebControl x:Name="browser" Grid.Row="1"/>
+        <awe:WebControl x:Name="webControl" Grid.Row="1" Source="{Binding Source, ElementName=MyToolWindow}" />
     </Grid>
 </UserControl>
